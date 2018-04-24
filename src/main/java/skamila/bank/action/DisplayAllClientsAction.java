@@ -1,7 +1,7 @@
 package skamila.bank.action;
 
-import skamila.bank.CustomerAccount;
-import skamila.bank.CustomerDatabase;
+import skamila.bank.database.CustomerAccount;
+import skamila.bank.database.CustomerAccountDatabase;
 import skamila.bank.utilities.DisplayClients;
 import skamila.cmdMenuFramework.Action;
 
@@ -9,9 +9,9 @@ import java.util.ArrayList;
 
 public class DisplayAllClientsAction implements Action {
 
-    CustomerDatabase database;
+    CustomerAccountDatabase database;
 
-    public DisplayAllClientsAction(CustomerDatabase database){
+    public DisplayAllClientsAction(CustomerAccountDatabase database){
         this.database = database;
     }
 

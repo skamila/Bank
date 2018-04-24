@@ -1,4 +1,6 @@
-package skamila.bank;
+package skamila.bank.database;
+
+import skamila.bank.database.CustomerAccount;
 
 import java.util.ArrayList;
 
@@ -12,11 +14,11 @@ import java.io.PrintWriter;
 import static java.nio.file.StandardOpenOption.APPEND;
 import static java.nio.file.StandardOpenOption.CREATE;
 
-public class CustomerDatabase {
+public class CustomerAccountDatabase {
     private String filePath;
     private ArrayList<CustomerAccount> customerDatabase;
 
-    public CustomerDatabase(String filePath){
+    public CustomerAccountDatabase(String filePath){
         customerDatabase = new ArrayList<>();
         this.filePath = filePath;
     }

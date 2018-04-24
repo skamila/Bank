@@ -1,4 +1,4 @@
-package skamila.bank;
+package skamila.bank.database;
 
 import java.math.BigDecimal;
 

@@ -1,8 +1,6 @@
 package skamila.bank.utilities;
 
-import skamila.bank.CustomerAccount;
-import skamila.bank.CustomerDatabase;
-import skamila.cmdMenuFramework.Action;
+import skamila.bank.database.CustomerAccount;
 
 import java.util.ArrayList;
 

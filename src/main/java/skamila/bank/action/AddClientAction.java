@@ -1,10 +1,9 @@
 package skamila.bank.action;
 
-import skamila.bank.CustomerAccount;
-import skamila.bank.CustomerDatabase;
+import skamila.bank.database.CustomerAccount;
+import skamila.bank.database.CustomerAccountDatabase;
 import skamila.bank.utilities.Confirmation;
-import skamila.bank.utilities.GetData;
-import skamila.bank.validator.*;
+import skamila.bank.database.CustomerAccountInput;
 import skamila.cmdMenuFramework.Action;
 import skamila.cmdMenuFramework.input.ConsoleInput;
 import skamila.cmdMenuFramework.input.Input;
@@ -12,9 +11,9 @@ import java.io.FileNotFoundException;
 
 public class AddClientAction implements Action {
 
-    CustomerDatabase database;
+    CustomerAccountDatabase database;
 
-    public AddClientAction(CustomerDatabase database){
+    public AddClientAction(CustomerAccountDatabase database){
         this.database = database;
     }
 
@@ -23,7 +22,7 @@ public class AddClientAction implements Action {
 
         Input input = new ConsoleInput ();
         Confirmation confirmation = new Confirmation();
-        GetData getter = new GetData();
+        CustomerAccountInput getter = new CustomerAccountInput();
 
         String firstName = getter.getFirstName();
         String surname = getter.getSurname();

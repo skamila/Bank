@@ -1,21 +1,21 @@
 package skamila.bank.action;
 
-import skamila.bank.CustomerDatabase;
+import skamila.bank.database.CustomerAccountDatabase;
 import skamila.bank.utilities.DisplayClients;
-import skamila.bank.utilities.GetData;
+import skamila.bank.database.CustomerAccountInput;
 import skamila.cmdMenuFramework.Action;
 
 public class DisplayClientsByFirstNameAction implements Action {
 
-    CustomerDatabase database;
+    CustomerAccountDatabase database;
 
-    public DisplayClientsByFirstNameAction(CustomerDatabase database){
+    public DisplayClientsByFirstNameAction(CustomerAccountDatabase database){
         this.database = database;
     }
 
     @Override
     public void action() {
-        GetData getter = new GetData();
+        CustomerAccountInput getter = new CustomerAccountInput();
 
         String city =  getter.getFirstName();
         DisplayClients printer = new DisplayClients();

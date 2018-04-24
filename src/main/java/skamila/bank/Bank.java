@@ -1,6 +1,7 @@
 package skamila.bank;
 
 import skamila.bank.action.*;
+import skamila.bank.database.CustomerAccountDatabase;
 import skamila.cmdMenuFramework.Menu;
 import skamila.cmdMenuFramework.input.ConsoleInput;
 import skamila.cmdMenuFramework.menuEntry.MenuEntry;
@@ -19,7 +20,7 @@ public class Bank {
 
         System.out.println("SYSTEM BANKOWY");
         System.out.println("----------------------------------------------------------------------------------------------------------------------------------------");
-        CustomerDatabase database = new CustomerDatabase("customerDatabase.txt");
+        CustomerAccountDatabase database = new CustomerAccountDatabase("customerDatabase.txt");
 
         try {
             database.load();
@@ -34,7 +35,7 @@ public class Bank {
 
     }
 
-    private static Menu makeMenu(CustomerDatabase database){
+    private static Menu makeMenu(CustomerAccountDatabase database){
 
         ArrayList <MenuEntry> menuList = new ArrayList<>();
         ArrayList <MenuEntry> submenuList = new ArrayList<>();

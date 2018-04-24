@@ -1,18 +1,16 @@
-package skamila.bank.utilities;
+package skamila.bank.database;
 
-import skamila.bank.CustomerAccount;
+import skamila.cmdMenuFramework.validator.Validator;
 import skamila.bank.validator.*;
 import skamila.cmdMenuFramework.input.ConsoleInput;
 import skamila.cmdMenuFramework.input.Input;
 
-import java.io.FileNotFoundException;
-
-public class GetData {
+public class CustomerAccountInput {
 
     private Input input;
     private Validator validator;
 
-    public GetData(){
+    public CustomerAccountInput(){
         input = new ConsoleInput();
     }
 

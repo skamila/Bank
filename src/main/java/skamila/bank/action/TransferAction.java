@@ -1,11 +1,11 @@
 package skamila.bank.action;
 
-import skamila.bank.CustomerAccount;
-import skamila.bank.CustomerDatabase;
+import skamila.bank.database.CustomerAccount;
+import skamila.bank.database.CustomerAccountDatabase;
 import skamila.bank.utilities.Confirmation;
 import skamila.bank.validator.AmountValidator;
 import skamila.bank.validator.CustomerIdValidator;
-import skamila.bank.validator.Validator;
+import skamila.cmdMenuFramework.validator.Validator;
 import skamila.cmdMenuFramework.Action;
 import skamila.cmdMenuFramework.input.ConsoleInput;
 import skamila.cmdMenuFramework.input.Input;
@@ -15,9 +15,9 @@ import java.math.BigDecimal;
 
 public class TransferAction implements Action {
 
-    CustomerDatabase database;
+    CustomerAccountDatabase database;
 
-    public TransferAction(CustomerDatabase database) {
+    public TransferAction(CustomerAccountDatabase database) {
         this.database = database;
     }
 

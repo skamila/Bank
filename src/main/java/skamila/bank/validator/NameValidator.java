@@ -1,5 +1,7 @@
 package skamila.bank.validator;
 
+import skamila.cmdMenuFramework.validator.Validator;
+
 public class NameValidator implements Validator {
 
     @Override
