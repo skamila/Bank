@@ -1,4 +1,4 @@
-#BANK
+# BANK
 
 Program przeznaczony jest dla pracowników banku.
 
