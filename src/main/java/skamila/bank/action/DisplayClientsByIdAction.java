@@ -19,11 +19,9 @@ public class DisplayClientsByIdAction implements Action {
     @Override
     public void action() {
 
-        CustomerAccountInput getter = new CustomerAccountInput();
-
-        int id =  getter.getId();
+        CustomerAccountInput input = new CustomerAccountInput();
+        int id =  input.getId();
         DisplayClients printer = new DisplayClients();
-
         ArrayList<CustomerAccount> customer = new ArrayList<>();
 
         try {

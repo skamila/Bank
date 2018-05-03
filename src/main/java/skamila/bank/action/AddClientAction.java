@@ -20,19 +20,19 @@ public class AddClientAction implements Action {
     @Override
     public void action() {
 
-        Input input = new ConsoleInput ();
+        Input confirmInput = new ConsoleInput ();
         Confirmation confirmation = new Confirmation();
-        CustomerAccountInput getter = new CustomerAccountInput();
+        CustomerAccountInput input = new CustomerAccountInput();
 
-        String firstName = getter.getFirstName();
-        String surname = getter.getSurname();
-        String personalIdentityNumber = getter.getPersonalIdentityNumber();
-        String address = getter.getAddress();
-        String postCode = getter.getPostCode();
-        String city = getter.getCity();
+        String firstName = input.getFirstName();
+        String surname = input.getSurname();
+        String personalIdentityNumber = input.getPersonalIdentityNumber();
+        String address = input.getAddress();
+        String postCode = input.getPostCode();
+        String city = input.getCity();
 
         System.out.println("Czy na pewno chcesz dodać użytkownika? [T/N]");
-        if (confirmation.ifConfirm(input.getInput())){
+        if (confirmation.ifConfirm(confirmInput.getInput())){
             database.addCustomer(new CustomerAccount(database.getNewId(), firstName, surname,
                     personalIdentityNumber, address, postCode, city));
             try {

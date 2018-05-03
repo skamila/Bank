@@ -16,10 +16,10 @@ public class DisplayClientsByCityAction implements Action {
     @Override
     public void action() {
 
-        CustomerAccountInput getter = new CustomerAccountInput();
-
-        String city =  getter.getCity();
+        CustomerAccountInput input = new CustomerAccountInput();
+        String city =  input.getCity();
         DisplayClients printer = new DisplayClients();
+
         try {
             printer.display(database.getByCity(city));
         } catch (IllegalArgumentException e){

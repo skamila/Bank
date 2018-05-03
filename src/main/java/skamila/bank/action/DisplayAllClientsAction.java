@@ -17,13 +17,13 @@ public class DisplayAllClientsAction implements Action {
 
     @Override
     public void action() {
-        DisplayClients printer = new DisplayClients();
-        ArrayList<CustomerAccount> allClients = database.getAll();
 
-        if (allClients.size() != 0) {
-            printer.display(allClients);
-        } else {
-            System.out.println("Nie znaleziono żadnych klientów spełniających podane kryterium.");
+        DisplayClients printer = new DisplayClients();
+
+        try {
+            printer.display(database.getAll());
+        } catch (IllegalArgumentException e){
+            System.out.println("Nie znaleziono żadnych klientów.");
         }
 
     }

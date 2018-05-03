@@ -15,12 +15,13 @@ public class DisplayClientsByAddressAction implements Action {
 
     @Override
     public void action() {
-        CustomerAccountInput getter = new CustomerAccountInput();
 
-        String city =  getter.getAddress();
+        CustomerAccountInput input = new CustomerAccountInput();
+        String address =  input.getAddress();
         DisplayClients printer = new DisplayClients();
+
         try {
-            printer.display(database.getByAddress(city));
+            printer.display(database.getByAddress(address));
         } catch (IllegalArgumentException e){
             System.out.println("Nie znaleziono żadnych klientów spełniających podane kryterium.");
         }

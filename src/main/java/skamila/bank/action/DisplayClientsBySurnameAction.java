@@ -16,10 +16,10 @@ public class DisplayClientsBySurnameAction implements Action {
     @Override
     public void action() {
 
-        CustomerAccountInput getter = new CustomerAccountInput();
-
-        String surname =  getter.getSurname();
+        CustomerAccountInput input = new CustomerAccountInput();
+        String surname =  input.getSurname();
         DisplayClients printer = new DisplayClients();
+
         try {
             printer.display(database.getBySurname(surname));
         } catch (IllegalArgumentException e){

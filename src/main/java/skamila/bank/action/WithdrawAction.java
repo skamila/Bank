@@ -2,6 +2,7 @@ package skamila.bank.action;
 
 import skamila.bank.database.CustomerAccount;
 import skamila.bank.database.CustomerAccountDatabase;
+import skamila.bank.database.CustomerAccountInput;
 import skamila.bank.utilities.Confirmation;
 import skamila.bank.validator.AmountValidator;
 import skamila.bank.validator.CustomerIdValidator;
@@ -29,35 +30,30 @@ public class WithdrawAction implements Action {
             return;
         }
 
-        Input input = new ConsoleInput();
+        Input confirmInput = new ConsoleInput();
         Validator amountValidator = new AmountValidator();
-        Validator customerIdValidator = new CustomerIdValidator();
         Confirmation confirmation = new Confirmation();
         CustomerAccount account = new CustomerAccount();
-        String customerId;
-
-        System.out.print("Wpisz numer klienta:\t");
-        boolean wrongCustomerNumberError;
+        int customerId;
+        CustomerAccountInput input = new CustomerAccountInput();
+        boolean ifContinue = false;
 
         do {
-            customerId = input.getInput();
-
-            while (!customerIdValidator.validate(customerId)) {
-                System.out.println("Numer klienta to liczba calkowita wieksza niz 1.");
-                customerId = input.getInput();
-            }
-
-            wrongCustomerNumberError = false;
-
+            ifContinue = false;
+            customerId = input.getId();
             try {
-                account = database.getById(Integer.parseInt(customerId));
+                account = database.getById(customerId);
             } catch (IllegalArgumentException e) {
-                System.out.println("Nie znaleziono klienta. Upewnij się, że podałeś poprawny numer klienta.");
-                wrongCustomerNumberError = true;
+                System.out.println("Wpisałeś niepoprawny numer użytkownika. Czy chcesz spróbować ponownie? (T/N)");
+                if (confirmation.ifConfirm(confirmInput.getInput())) ifContinue = true;
+                else return;
             }
+        } while (ifContinue);
 
-        } while (wrongCustomerNumberError);
-
+        if (new BigDecimal(account.getFunds()).compareTo(new BigDecimal("0.00")) == 0) {
+            System.out.println("Brak środków na końcie.");
+            return;
+        }
 
         System.out.print("Wpisz kwotę:\t");
         boolean wrongAmountError;
@@ -65,10 +61,10 @@ public class WithdrawAction implements Action {
 
         do {
             wrongAmountError = false;
-            amount = input.getInput();
+            amount = confirmInput.getInput();
             while (!amountValidator.validate(amount)) {
                 System.out.println("Kwota nie może być mniejsza od 0 i i może mieć max. dwie cyfry po przecinku.");
-                amount = input.getInput();
+                amount = confirmInput.getInput();
             }
 
             if (new BigDecimal(amount).compareTo(new BigDecimal(account.getFunds())) == 1) {
@@ -79,7 +75,7 @@ public class WithdrawAction implements Action {
 
 
         System.out.println("Czy na pewno chcesz dokonać wypłaty w wysokości " + amount + " PLN ? [T/N]");
-        if (confirmation.ifConfirm(input.getInput())) {
+        if (confirmation.ifConfirm(confirmInput.getInput())) {
             account.subFunds(amount);
             try {
                 database.update();

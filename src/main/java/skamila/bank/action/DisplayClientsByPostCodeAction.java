@@ -15,12 +15,13 @@ public class DisplayClientsByPostCodeAction implements Action {
 
     @Override
     public void action() {
-        CustomerAccountInput getter = new CustomerAccountInput();
 
-        String city =  getter.getPostCode();
+        CustomerAccountInput input = new CustomerAccountInput();
+        String postCode =  input.getPostCode();
         DisplayClients printer = new DisplayClients();
+
         try {
-            printer.display(database.getByPostCode(city));
+            printer.display(database.getByPostCode(postCode));
         } catch (IllegalArgumentException e){
             System.out.println("Nie znaleziono żadnych klientów spełniających podane kryterium.");
         }

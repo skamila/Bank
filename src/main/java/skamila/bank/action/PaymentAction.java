@@ -11,6 +11,7 @@ import skamila.cmdMenuFramework.input.ConsoleInput;
 import skamila.cmdMenuFramework.input.Input;
 
 import java.io.FileNotFoundException;
+import java.math.BigDecimal;
 
 public class PaymentAction implements Action {
 
@@ -28,38 +29,35 @@ public class PaymentAction implements Action {
             return;
         }
 
-        Input input = new ConsoleInput();
+        Input confirmInput = new ConsoleInput();
         Validator amountValidator = new AmountValidator();
         Confirmation confirmation = new Confirmation();
         CustomerAccount account = new CustomerAccount();
         int customerId;
-        CustomerAccountInput getter = new CustomerAccountInput();
-        boolean wrongCustomerNumberError;
+        CustomerAccountInput input = new CustomerAccountInput();
+        boolean ifContinue = false;
 
         do {
-            customerId = getter.getId();
-
-            wrongCustomerNumberError = false;
-
+            ifContinue = false;
+            customerId = input.getId();
             try {
                 account = database.getById(customerId);
             } catch (IllegalArgumentException e) {
-                System.out.println("Nie znaleziono klienta. Upewnij się, że podałeś poprawny numer klienta.");
-                wrongCustomerNumberError = true;
+                System.out.println("Wpisałeś niepoprawny numer użytkownika. Czy chcesz spróbować ponownie? (T/N)");
+                if (confirmation.ifConfirm(confirmInput.getInput())) ifContinue = true;
+                else return;
             }
-
-        } while (wrongCustomerNumberError);
-
+        } while (ifContinue);
 
         System.out.print("Wpisz kwotę:\t");
-        String amount = input.getInput();
+        String amount = confirmInput.getInput();
         while (!amountValidator.validate(amount)) {
             System.out.println("Kwota nie może być mniejsza od 0 i może mieć max. dwie cyfry po przecinku.");
-            amount = input.getInput();
+            amount = confirmInput.getInput();
         }
 
         System.out.println("Czy na pewno chcesz dokonać wpłaty w wysokości " + amount + " PLN ? [T/N]");
-        if (confirmation.ifConfirm(input.getInput())) {
+        if (confirmation.ifConfirm(confirmInput.getInput())) {
             account.addFunds(amount);
             try {
                 database.update();

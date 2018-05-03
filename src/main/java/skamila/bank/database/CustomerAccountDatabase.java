@@ -191,6 +191,7 @@ public class CustomerAccountDatabase {
     }
 
     public ArrayList<CustomerAccount> getAll(){
+        if (customerDatabase.isEmpty()) throw new IllegalArgumentException();
         return customerDatabase;
     }
 

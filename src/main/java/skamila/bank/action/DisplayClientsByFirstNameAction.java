@@ -15,12 +15,13 @@ public class DisplayClientsByFirstNameAction implements Action {
 
     @Override
     public void action() {
-        CustomerAccountInput getter = new CustomerAccountInput();
 
-        String city =  getter.getFirstName();
+        CustomerAccountInput input = new CustomerAccountInput();
+        String firstName =  input.getFirstName();
         DisplayClients printer = new DisplayClients();
+
         try {
-            printer.display(database.getByFirstName(city));
+            printer.display(database.getByFirstName(firstName));
         } catch (IllegalArgumentException e){
             System.out.println("Nie znaleziono żadnych klientów spełniających podane kryterium.");
         }

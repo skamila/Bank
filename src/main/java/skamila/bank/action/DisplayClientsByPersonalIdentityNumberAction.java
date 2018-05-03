@@ -15,12 +15,13 @@ public class DisplayClientsByPersonalIdentityNumberAction implements Action {
 
     @Override
     public void action() {
-        CustomerAccountInput getter = new CustomerAccountInput();
 
-        String city =  getter.getPersonalIdentityNumber();
+        CustomerAccountInput input = new CustomerAccountInput();
+        String personalIdentityNumber =  input.getPersonalIdentityNumber();
         DisplayClients printer = new DisplayClients();
+
         try {
-            printer.display(database.getByPersonalIdentityNumber(city));
+            printer.display(database.getByPersonalIdentityNumber(personalIdentityNumber));
         } catch (IllegalArgumentException e){
             System.out.println("Nie znaleziono żadnych klientów spełniających podane kryterium.");
         }

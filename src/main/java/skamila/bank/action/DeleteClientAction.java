@@ -26,30 +26,27 @@ public class DeleteClientAction implements Action {
             return;
         }
 
-        Input input = new ConsoleInput();
+        Input confirmInput = new ConsoleInput();
         Confirmation confirmation = new Confirmation();
         CustomerAccount account = new CustomerAccount();
         int customerId;
-
-        boolean wrongCustomerNumberError;
-        CustomerAccountInput getter = new CustomerAccountInput();
+        CustomerAccountInput input = new CustomerAccountInput();
+        boolean ifContinue = false;
 
         do {
-            customerId = getter.getId();
-
-            wrongCustomerNumberError = false;
-
+            ifContinue = false;
+            customerId = input.getId();
             try {
                 account = database.getById(customerId);
             } catch (IllegalArgumentException e) {
-                System.out.println("Nie znaleziono klienta. Upewnij się, że podałeś poprawny numer klienta.");
-                wrongCustomerNumberError = true;
+                System.out.println("Wpisałeś niepoprawny numer użytkownika. Czy chcesz spróbować ponownie? (T/N)");
+                if (confirmation.ifConfirm(confirmInput.getInput())) ifContinue = true;
+                else return;
             }
-
-        } while (wrongCustomerNumberError);
+        } while (ifContinue);
 
         System.out.println("Czy na pewno chcesz usunąć użytkownika? [T/N]");
-        if (confirmation.ifConfirm(input.getInput())) {
+        if (confirmation.ifConfirm(confirmInput.getInput())) {
             database.deleteCustomer(customerId);
             try {
                 database.update();
